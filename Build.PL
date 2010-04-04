@@ -25,7 +25,7 @@ my $builder = $build_class->new(
         'http://rt.cpan.org/NoAuth/Bugs.html?Dist=CAD-Format-STL',
       #MailingList => 'mailto:...',
       repository =>
-        'http://scratchcomputing.com/svn/CAD-Format-STL/trunk',
+        'http://svn.scratchcomputing.com/CAD-Format-STL/trunk',
     }
   },
 );

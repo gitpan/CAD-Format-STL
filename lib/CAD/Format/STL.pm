@@ -1,5 +1,5 @@
 package CAD::Format::STL;
-$VERSION = v0.0.1;
+$VERSION = v0.2.1;
 
 use warnings;
 use strict;
@@ -67,6 +67,12 @@ non-cached (or an override for unpack_point().)
 Maybe $self->set_writer() and set_reader() immutable object methods?
 
 =end design
+
+=head1 ABOUT
+
+This module provides object-oriented methods to read and write the STL
+(Stereo Lithography) file format in both binary and ASCII forms.  The
+STL format is a simple set of 3D triangles.
 
 =cut
 

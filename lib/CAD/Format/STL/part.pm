@@ -1,5 +1,5 @@
 package CAD::Format::STL::part;
-$VERSION = v0.0.1;
+$VERSION = v0.2.1;
 
 use warnings;
 use strict;
@@ -37,8 +37,10 @@ sub new {
     name => (defined($name) ? $name : 'CAD::Format::STL part'),
     facets => [],
   };
-  $self->add_facets(@facets) if(@facets);
   bless($self, $class);
+
+  $self->add_facets(@facets) if(@facets);
+
   return($self);
 } # end subroutine new definition
 ########################################################################
@@ -46,6 +48,12 @@ sub new {
 =head2 add_facets
 
   $self->add_facets(@facets);
+
+Facets are stored with the normal vector, followed by vertices.
+Typically, a single facet is a triangle and the normal is [0,0,0]
+(meaning that it should be calculated by the user if needed.)
+
+  [0,0,0], [0,0,0],[0,1,0],[1,1,0]
 
 =cut
 

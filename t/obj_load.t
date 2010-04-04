@@ -32,4 +32,34 @@ is(scalar($part->facets), 12, 'twelve triangles');
   like($@, qr/no part/, 'nothing there');
 }
 
+my @cube_def = (
+  [[0,0,0], [0,1,0], [1,1,0]],
+  [[0,0,0], [1,1,0], [1,0,0]],
+  [[0,0,0], [0,0,1], [0,1,1]],
+  [[0,0,0], [0,1,1], [0,1,0]],
+  [[0,0,0], [1,0,0], [1,0,1]],
+  [[0,0,0], [1,0,1], [0,0,1]],
+  [[0,0,1], [1,0,1], [1,1,1]],
+  [[0,0,1], [1,1,1], [0,1,1]],
+  [[1,0,0], [1,1,0], [1,1,1]],
+  [[1,0,0], [1,1,1], [1,0,1]],
+  [[0,1,0], [0,1,1], [1,1,1]],
+  [[0,1,0], [1,1,1], [1,1,0]],
+);
+{ # try adding parts
+  my $p = $stl->add_part('cube2');
+  isa_ok($p, 'CAD::Format::STL::part');
+  is($p->name, 'cube2', 'part name');
+  $p->add_facets(@cube_def);
+  is(scalar($p->facets), 12, 'twelve triangles');
+  is_deeply([$p->facets], [map({[[0,0,0], @$_]} @cube_def)]);
+}
+{ # once more with immediate data passing
+  my $p = $stl->add_part('cube2', @cube_def);
+  isa_ok($p, 'CAD::Format::STL::part');
+  is($p->name, 'cube2', 'part name');
+  is(scalar($p->facets), 12, 'twelve triangles');
+  is_deeply([$p->facets], [map({[[0,0,0], @$_]} @cube_def)]);
+}
+
 # vim:ts=2:sw=2:et:sta
